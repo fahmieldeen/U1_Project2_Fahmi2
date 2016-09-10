@@ -10,11 +10,14 @@ float ii;
 float i2;
 float ii2;
 int pos;
-
+/*
+I made most of these data types into floats because I needed to be more precise 
+in the movements/position moving
+*/
 void setup()
 {
   fullScreen();
-  circleX = new float[15];
+  circleX = new float[15];//arrays 
   circleY = new float[15];
   for (int i=0; i<15; i++)
   {
@@ -38,6 +41,9 @@ void draw()
 
 void DrawShootingFirework()
 {
+  /*
+  movement of the firework shooting into the sky
+  */
   fill(0, 255, 0);
   ellipse(713, y1, x, y);
   y = y - 0.25;
@@ -47,6 +53,10 @@ void DrawShootingFirework()
 
 void Collisions()
 {
+  /*
+  This allows the "fireworks" to react exactly when the shooter hits the top 
+  of the screen
+  */
   if (y1 <= 0)
   {
     for (int i=0; i<15; i++)
@@ -62,7 +72,11 @@ void Collisions()
 }
 void EndFirework()
 {
-  fill(0);
+  /*
+  Two small circles moving closer together and when colided, a message pops up 
+  in console/ portrays the end of the art
+  */
+  fill(0); //trying to hide the circles when the firework is shooting into the sky
   ellipse(i-1, ii+449, 50, 50);
   i = i + 1;
   ellipse(i2+1399, ii2+449, 50, 50);
