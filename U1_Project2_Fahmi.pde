@@ -2,21 +2,18 @@ float x = 7; //data types for the shooting firework
 float y = 7; 
 float y1 = 880;
 
-float FireworkX = 25; //data type for the actual fireworks
-float FireworkY = 25;
+float FireworkX = 50; //data type for the actual fireworks
+float FireworkY = 50;
 float circleX[];
 float circleY[];
-
-int i = 0; //data type for the collisions
-int ii = 450;
-int i2 = 1440;
-int ii2 = 450;
-int circleR = 50;
-int circle2R = 50;
 
 String s = "HAPPY NEW YEAR!!"; 
 int pos;
 int value = 0;
+
+boolean isReleased = false;
+int Screen = 0;
+
 /*
 I made most of these data types into floats because I needed to be more precise 
  in the movements/position moving
@@ -41,9 +38,15 @@ void draw()
 {
   background(0);
   noStroke();
+  if (Screen == 0)
+  {
+    StartScreen();
+  }
+  if (Screen == 1)
+  {
   DrawShootingFirework();
   Collisions();
-  EndFirework();
+  }
 }
 
 void DrawShootingFirework()
@@ -53,9 +56,9 @@ void DrawShootingFirework()
    */
   fill(255);
   ellipse(713, y1, x, y);
-  y = y - 0.25;
+  y = y - 0.1;
   y1 = y1 - 4;
-  x = x + 0.2;
+  x = x + 0.1;
 }
 
 void Collisions()
@@ -75,23 +78,26 @@ void Collisions()
       FireworkX = FireworkX + 0.1;
       FireworkY = FireworkY + 0.1;
     }
+    {
+      text(s, 400, 700, 450, 20);
+    }
   }
 }
-void EndFirework()
-{
-  /*
-  Two small circles moving closer together and when colided, a message pops up 
-   in console/ portrays the end of the art
-   */
-  fill(0); //trying to hide the circles when the firework is shooting into the sky
-  ellipse(i, ii, circleR*2, circleR*2); //movement of first circle
-  i = i + 1;
-  ellipse(i2, ii2, circle2R*2, circle2R*2); //movement of second circle
-  i2 = i2 - 1;
 
-    if (dist(i, ii, i2, ii2) < circleR+circle2R); //collisions 
+void StartScreen()
+{
+  text("PRESS SPACE TO LAUNCH FIREWORKS", 670, height/2);
+  if( isReleased )
+  {
+    if ( key == ' ' )
     {
-      text(s, 600, 720, 450, 700); // s is the string for what it will say on the screen
-    println("YAY HAPPY NEW YEAR!!"); // this is for the console once you quit the screen
+      Screen = 1;
+    }
+    isReleased = false;
+  }
 }
+
+void keyReleased()
+{
+  isReleased = true;
 }
